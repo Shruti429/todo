@@ -1,0 +1,58 @@
+<!-- task-form.component.html -->
+<form [formGroup]="taskForm" (ngSubmit)="onSubmit()" class="box">
+  <h1 style="color: #092635; font-weight: 700;">Add Task</h1>
+    <div class="field mb-4 mt-5">
+      <label class="label">Title:</label>
+      <div class="control">
+        <input class="input is-rounded" formControlName="title" />
+      </div>
+    </div>
+  
+    <div class="field mb-4">
+      <label class="label">Description:</label>
+      <div class="control">
+        <textarea class="textarea has-fixed-size" formControlName="description"></textarea>
+      </div>
+    </div>
+  
+    <div class="field mb-4">
+      <label class="label">Due Date:</label>
+      <div class="control">
+        <input class="input is-rounded" type="date" formControlName="dueDate" />
+      </div>
+    </div>
+  
+    <div class="field mb-4 ">
+      <label class="label">Priority:</label>
+      <div class="control">
+        <div class="select is-rounded is-fullwidth">
+          <select formControlName="priority">
+            <option value="low">Low</option>
+            <option value="medium">Medium</option>
+            <option value="high">High</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  
+    <div class="field mb-4 ">
+      <label class="label">Status:</label>
+      <div class="control">
+        <div class="select is-rounded is-fullwidth">
+          <select formControlName="status">
+            <option value="to-do">To-Do</option>
+            <option value="in-progress">In Progress</option>
+            <option  value="completed">Completed</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  
+    <div class="field columns is-centered m-3 mt-3">
+      <div class="control column is-6">
+        <button class="button is-link is-rounded has-text-centered" type="submit">Add Task</button>
+      </div>
+    </div>
+    
+    
+  </form>

@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "target": "es2020",
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "strict": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "declaration": true,
+    "noImplicitAny": false
+  },
+  "include": [
+    "src/**/*.ts"
+, "src/app.cjs"  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ],
+  "types": ["node"]
+}

@@ -1,0 +1,34 @@
+version: '3'
+services:
+  express-app:
+    build:
+      context: ./api
+    ports:
+      - "3000:3000"
+    environment:
+      MONGODB_URI: "mongodb+srv://shrutiomar429:shruti2879@cluster0.pqwbjxw.mongodb.net/test?retryWrites=true&w=majority"
+    env_file:
+      - ./API/.env
+    depends_on:
+      - mongodb
+    networks:
+      - mean-stack-network
+
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    networks:
+      - mean-stack-network
+
+  angular-app:
+    build:
+      context: ./frontend
+    ports:
+      - "4200:4200"
+    networks:
+      - mean-stack-network
+
+networks:
+  mean-stack-network:
+    driver: bridge

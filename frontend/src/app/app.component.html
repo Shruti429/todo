@@ -1,0 +1,24 @@
+<router-outlet>
+    <nav class="navbar" role="navigation" aria-label="main navigation" style="background-color: #092635;">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="#" style="color: white;">
+          Task Management System
+        </a>
+      </div>
+    </nav>
+
+    <div class="columns m-1 is-centered" style="background-color: #b4d5e4;">
+      <div class="column is-3" >
+        <app-task-form ></app-task-form>
+      </div>
+      <div class="column is-8 mr-0 m-2 is-fullwidth " style="background-color: white; border-radius: 6px;">
+        
+         <h1 style="color: #092635; font-weight: 700;">Tasks</h1>
+         <app-task-list></app-task-list>
+      </div>
+    </div>
+    <router-outlet></router-outlet>
+ 
+</router-outlet>
+
+

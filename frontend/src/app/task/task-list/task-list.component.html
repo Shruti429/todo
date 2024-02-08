@@ -1,0 +1,102 @@
+<!-- task-list.component.html -->
+<button class="button is-link is-light m-1 is-small" (click)="sortByDueDate()">Sort by Due Date</button>
+<button class="button is-link is-light m-1 is-small" (click)="sortByPriority()">Sort by Priority</button>
+<button class="button is-link is-light m-1 is-small" (click)="sortByStatus()">Sort by Status</button>
+<table class="table is-striped is is-fullwidth is-hoverable">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Due Date</th>
+      <th>Priority</th>
+      <th>Status</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngFor="let task of tasks">
+      <tr>
+        <td (click)="toggleDetails(task)">{{ task.title }}</td>
+        <td (click)="toggleDetails(task)">{{ task.dueDate | date:'dd-MM-yyyy' }}</td>
+        <td (click)="toggleDetails(task)">{{ task.priority }}</td>
+        <td (click)="toggleDetails(task)">{{ task.status }}</td>
+        <td>
+          <!-- Dropdown for changing task status -->
+          <div *ngIf="selectedTask && selectedTask._id === task._id">
+           
+          </div>
+          
+          <button class="button is-danger is-light is-small m-1" (click)="deleteTask(task)">Delete</button>
+          <!-- Button to open the history modal -->
+          <button type="button" class="button is-info is-light is-small m-1 " (click)="openHistoryModal()">History</button>
+          <button class="button is-link is-light is-small is-pulled-right" (click)="exportTasksToCsv()">Export to CSV</button>
+<!-- History Modal -->
+<div class="modal" tabindex="-1" role="dialog" *ngIf="historyModalVisible">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Task History</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeHistoryModal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- Display task history details here -->
+        <ul>
+          <li *ngFor="let log of taskHistoryLogs">{{ log }}</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+        </td>
+      </tr>
+      <!--edit task-->
+      <tr *ngIf="selectedTask && selectedTask._id === task._id && isDetailsOpen">
+        <td colspan="5">
+          <form #taskForm="ngForm" (submit)="updateTask(taskForm, $event)">
+            <!-- Task details form fields -->
+            <label class="label">Title: <input class="input is-small" [(ngModel)]="selectedTask.title" name="title" /></label>
+           
+            <label class="label">Description:</label>
+            <textarea class="textarea is-small" [(ngModel)]="selectedTask.description" name="description"></textarea>
+            
+            <div class="columns mt-2 ">
+              <!-- Due Date -->
+              <div class="column">
+                <label class="label">Due Date: </label>
+                  <input class="input is-small" type="date" [(ngModel)]="selectedTask.dueDate" name="dueDate" />
+               
+              </div>
+              
+              <!-- Priority -->
+              <div class="column ">
+                <label class="label">Priority:</label>
+                  <select class="select input is-small is-fullwidth" [(ngModel)]="selectedTask.priority" name="priority">
+                    <option value="low">Low</option>
+                    <option value="medium">Medium</option>
+                    <option value="high">High</option>
+                  </select>
+                
+              </div>
+              
+              <!-- Status -->
+              <div class="column">
+                <label class="label" >Status:</label>
+                  <select class="select input is-small is-fullwidth" [(ngModel)]="selectedTask.status" name="status">
+                    <option value="to-do">To-Do</option>
+                    <option value="in-progress">In Progress</option>
+                    <option value="completed">Completed</option>
+                  </select>
+               
+              </div>
+            </div> 
+            
+            <!-- Save Button -->
+            <button class="button is-link has-text-centered is-pulled-right is-small" type="submit">Save</button>
+          </form>
+        </td>
+        
+      </tr>
+    </ng-container>
+  </tbody>
+</table>
